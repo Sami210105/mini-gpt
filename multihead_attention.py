@@ -24,12 +24,10 @@ class MultiHeadAttention(nn.Module): #is a nn, inherit from nn.Module -has built
     def forward(self, x, causal=True):
         #x: batch, seq_len, d_model
         batch, seq_len, d_model = x.shape
-        print(f"Input x: {x.shape}")
         
         Q = self.W_q(x) #take every token, multiply by weight add bias and produce query vector
         K = self.W_k(x)
         V = self.W_v(x)
-        print(f" Q/K/V shapes after splitting into heads: {Q.shape}, {K.shape}, {V.shape}")
         
         Q = Q.view(batch, seq_len, self.n_heads, self.d_k)
         K = K.view(batch, seq_len, self.n_heads, self.d_k)
@@ -41,7 +39,6 @@ class MultiHeadAttention(nn.Module): #is a nn, inherit from nn.Module -has built
         Q = Q.transpose(1,2)
         K = K.transpose(1,2)
         V = V.transpose(1,2)
-        print(f" Q/K/V shapes after transposing: {Q.shape}, {K.shape}, {V.shape}")
         
         scores = Q @ K.transpose(-2, -1) #to swap seq_len and d_k
         scores = scores / (self.d_k ** 0.5)
@@ -55,9 +52,9 @@ class MultiHeadAttention(nn.Module): #is a nn, inherit from nn.Module -has built
         head_outputs = head_outputs.transpose(1,2) #back to batch, seq_len, heads, d_k
         
         concat = head_outputs.contiguous().view(batch, seq_len, self.d_model)
-        print(f"Concatenated output shape: {concat.shape}")
+
         output = self.W_o(concat)
-        print(f"Final output shape: {output.shape}")
+        
         return output
     
 if __name__ == "__main__":
