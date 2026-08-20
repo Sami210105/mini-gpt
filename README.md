@@ -4,6 +4,10 @@ A GPT-style, decoder-only transformer implemented from scratch in PyTorch and tr
 
 ## Architecture
 
+<div align="center">
+  <img width="700" alt="image" src="https://github.com/user-attachments/assets/e3f3dc39-af47-4859-b35c-db093ec999f8" />
+</div>
+
 Standard decoder-only (GPT-style) transformer:
 
 ```
@@ -53,4 +57,4 @@ Character-level tokenization on the [tiny Shakespeare](https://github.com/karpat
 
 ## Training
 
-<img width="450" height="auto" alt="image" src="https://github.com/user-attachments/assets/6a490291-0e96-44d4-b18a-20e352c39faa" />
+<img width="400" height="auto" alt="image" src="https://github.com/user-attachments/assets/6a490291-0e96-44d4-b18a-20e352c39faa" />
